@@ -1,0 +1,25 @@
+
+@charset="utf-8"；
+*{
+  margin: 0；
+  padding: 0；
+}
+body{
+ width: 100%；
+ min-width: 600px；
+ max-width: 960px；
+ background:#FFFAFA
+ margin: 0 auto；
+}
+header{
+ width: 100%；
+ background:#FFDAB9
+}
+main{
+ width: 100%；
+ background:
+}
+footer{
+ width: 100%；
+ background:
+}

@@ -1,1 +1,347 @@
+<!DOCTYPE html>
 
+<meta charset="utf-8">
+
+<html>
+
+<head>
+    <title>社會觀察家</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .bg {
+            background-image: url("home-1.png");
+            height: 55%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #e09b9f;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: rgb(254, 253, 253);
+            text-align: center;
+            padding: 20px 20px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            /*變色背景*/
+            background-color: #d36275;
+        }
+
+        .active {
+            /*關於背景*/
+            background-color: #d36275;
+        }
+
+        #topButton {
+            display: none;
+            /* Hide the button by default */
+            position: fixed;
+            /* Fixed position to remain visible when scrolling */
+            bottom: 20px;
+            /* Distance from the bottom of the page */
+            right: 30px;
+            /* Distance from the right side of the page */
+            z-index: 99;
+            /* Ensure it appears above other elements */
+            font-size: 25px;
+            border: none;
+            outline: none;
+            background-color: #13401e;
+            color: #fff;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50px;
+            font-weight: bold;
+        }
+
+        /* 新增側邊欄的樣式 */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 60px;
+            /* 初始寬度 */
+            background-color: #e09b9f;
+            transition: width 0.5s;
+            z-index: 999;
+        }
+
+        .sidebar:hover,
+        .sidebar.opened {
+            width: 200px;
+            /* 鼠標靠近時的寬度 */
+        }
+
+        .sidebar ul {
+            font-size: 25px;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .sidebar li {
+            text-align: center;
+            padding: 50px 0;
+            width: 100%;
+            /* 讓連結佔據整個寬度 */
+            transition: background-color 0.5s;
+            /* 加入過渡效果 */
+        }
+
+        .sidebar li a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 20px;
+        }
+
+        .sidebar li:hover {
+            background-color: #d36275;
+            /* 變色背景 */
+        }
+
+        .content {
+            margin-left: 60px;
+            /* 預留側邊欄的寬度 */
+            transition: margin-left 0.5s;
+        }
+
+        /* 收縮側邊欄時的樣式 */
+        .sidebar.closed {
+            width: 60px;
+        }
+
+        .content.closed {
+            margin-left: 60px;
+        }
+
+        #captions1 {
+            margin-left: 200px;
+            margin-top: 20px;
+        }
+
+
+        #captions1 h1 {
+            font-size: 50px;
+            /* 修改文字大小為 24px */
+            margin-bottom: 10px;
+        }
+
+        #captions1 p {
+            font-size: 24px;
+            /* 修改文字大小為 24px */
+            margin-bottom: 10px;
+        }
+
+        #captions2 {
+            margin-left: 200px;
+            margin-top: 20px;
+        }
+
+        #captions2 h1 {
+            font-size: 50px;
+            /* 修改文字大小為 24px */
+            margin-bottom: 10px;
+        }
+        
+        #captions2 p {
+            font-size: 24px;
+            /* 修改文字大小為 24px */
+            margin-bottom: 10px;
+        }
+
+        #captions3 {
+            margin-left: 200px;
+            margin-top: 20px;
+        }
+
+        #captions3 h1 {
+            font-size: 50px;
+            /* 修改文字大小為 24px */
+            margin-bottom: 10px;
+        }
+        
+        #captions3 p {
+            font-size: 24px;
+            /* 修改文字大小為 24px */
+            margin-bottom: 10px;
+        }
+
+        #images img {
+            width: 30%;
+            /* 縮小為原始大小的一半 */
+            height: auto;
+            /* 保持圖片比例 */
+            margin: 0 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 側邊欄 -->
+    <div class="sidebar" onmouseover="openSidebar()" onmouseout="closeSidebar()">
+        <ul>
+            <li><a href="#captions1">時事分享</a></li>
+            <li><a href="#captions2">讀者投書</a></li>
+            <li><a href="#captions3">自律書籍推薦</a></li>
+        </ul>
+    </div>
+
+    <!-- 頁面內容 -->
+    <div class="content">
+
+        <ul>
+            <li><a href="自律工具.html">自律工具</a></li>
+            <li><a href="社會觀察家.html">社會觀察家</a></li>
+            <li><a href="瞭解本站.html">瞭解本站</a></li>
+        </ul>
+
+        <a href="index.html"><img src="home-1.png" style="width: 100%; margin: 0px 0;""></a>
+
+        <center><img src="圖片7.jpg" width="350px" ></center>
+
+    </div>
+
+    <div id="captions1">
+            <h1 style=background-color:gray;color:white>時事分享</h1>
+            <div id="images">
+                <a href="india.html">
+                    <img src="india.jpg" alt="...">
+                </a>
+            </div>
+
+            <a href="india.html">
+                <p>【時事分享｜印度將超越中國成為世界人口</p>
+            </a>
+
+            <a href="india.html">
+                <p>第一大國——是紅利還是炸彈？】</p>
+            </a>
+    </div>
+
+    <div id="captions2">
+        <h1 style=background-color:gray;color:white>讀者投書</h1>
+        <div id="images">
+            <a href="容貌焦慮.html">
+                <img src="容貌焦慮.jpg" alt="...">
+            </a>
+        </div>
+
+        <a href="容貌焦慮.html">
+            <p>【你也有「口罩恐慌症」嗎？｜當口罩成為</p>
+        </a>
+
+        <a href="india.html">
+            <p>容貌焦慮者的救贖】</p>
+        </a>
+    </div>
+
+    <div id="captions3">
+        <h1 style=background-color:gray;color:white>自律書籍推薦</h1>
+        <div id="images">
+            <a href="原子習慣.html">
+                <img src="原子習慣.jpg" alt="...">
+            </a>
+        </div>
+
+        <a href="原子習慣.html">
+            <p>【《原子習慣》：細微改變帶來巨大成就的</p>
+        </a>
+
+        <a href="india.html">
+            <p>實證法則】</p>
+        </a>
+    </div>
+
+    <script>
+        window.onscroll = function () {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById(" footerButton").style.display = "block";
+            } else {
+                document.getElementById("footerButton").style.display = "none";
+            }
+        } function scrollToFooter() {
+            const
+                footerElement = document.getElementById("footer"); footerElement.scrollIntoView({ behavior: "smooth" });
+        }
+    </script>
+
+    <button onclick="topFunction()" id="topButton" title="Go to top">Top</button>
+    </div>
+
+    <script>
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("topButton").style.display = "block";
+            } else {
+                document.getElementById("topButton").style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+    </script>
+    <!-- jQuery (Bootstrap JS plugins depend on it) -->
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/script.js"></script>
+
+    <script>
+        var sidebar = document.querySelector(".sidebar");
+        var content = document.querySelector(".content");
+
+        function openSidebar() {
+            sidebar.classList.add("opened");
+        }
+
+        function closeSidebar() {
+            sidebar.classList.remove("opened");
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            closeSidebar();
+        });
+
+    </script>
+
+</body>
+
+</html>

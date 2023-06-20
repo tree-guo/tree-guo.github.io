@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+
+<head>
+    <TITLE>自律上癮Bar</TITLE>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .bg {
+            background-image: url("home-1.png");
+            height: 55%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #e09b9f;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: rgb(254, 253, 253);
+            text-align: center;
+            padding: 20px 20px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            /*變色背景*/
+            background-color: #d36275;
+        }
+
+        .active {
+            /*關於背景*/
+            background-color: #d36275;
+        }
+        /*右下角的TOP鍵*/
+        #topButton {
+            display: none;
+            /* Hide the button by default */
+            position: fixed;
+            /* Fixed position to remain visible when scrolling */
+            bottom: 20px;
+            /* Distance from the bottom of the page */
+            right: 30px;
+            /* Distance from the right side of the page */
+            z-index: 99;
+            /* Ensure it appears above other elements */
+            font-size: 25px;
+            border: none;
+            outline: none;
+            background-color: #13401e;
+            color: #fff;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50px;
+            font-weight: bold;
+        }
+
+        #slideshow {
+            width: 900px;
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #slideshow img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 50px;
+            padding: 10px;
+            background-color: transparent;
+        }
+
+        .arrow.previous {
+            left: 10px;
+        }
+
+        .arrow.next {
+            right: 10px;
+        }
+
+      #captions {
+            margin-top: 20px;
+        }
+
+        #captions h1 {
+            font-size: 50px;
+            /* 修改文字大小為 50px */
+            margin-bottom: 10px;
+        }
+         #captions h2 {
+            font-size: 20px;
+            /* 修改文字大小為 20px */
+            margin-bottom: 10px;
+        }
+         #captions p {
+            font-size: 15px;
+            /* 修改文字大小為 15px */
+            margin-bottom: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <ul>
+        <li><a href="自律工具.html">自律工具</a></li>
+        <li><a href="社會觀察家.html">社會觀察家</a></li>
+        <li><a href="了解本站.html">瞭解本站</a></li>
+    </ul>
+
+    <a href="index.html"><img src="home-1.png" height="55.95%""></a>
+    
+
+    <p><font size=" 3" color="534741" face="微軟正黑體">
+
+    
+
+
+        <script>
+            var currentIndex = 0;
+            var slides = document.querySelectorAll('#slideshow img');
+            var previousArrow = document.querySelector('.arrow.previous');
+            var nextArrow = document.querySelector('.arrow.next');
+
+            function showSlide(index) {
+                for (var i = 0; i < slides.length; i++) {
+                    slides[i].style.display = 'none';
+                }
+                slides[index].style.display = 'block';
+            }
+
+            function previousSlide() {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                showSlide(currentIndex);
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % slides.length;
+                showSlide(currentIndex);
+            }
+
+            previousArrow.addEventListener('click', previousSlide);
+            nextArrow.addEventListener('click', nextSlide);
+
+            showSlide(currentIndex);
+            /*圖片輪播*/
+
+            previousArrow.addEventListener('mouseover', function () {
+                stopSlideInterval();
+            });
+
+            previousArrow.addEventListener('mouseout', function () {
+                startSlideInterval();
+            });
+
+            nextArrow.addEventListener('mouseover', function () {
+                stopSlideInterval();
+            });
+
+            nextArrow.addEventListener('mouseout', function () {
+                startSlideInterval();
+            });
+            /*-------------------------------------------------------*/
+            var slideInterval = setInterval(nextSlide, 3000); // 每 3 秒切換到下一張圖片
+
+            function startSlideInterval() {
+                slideInterval = setInterval(nextSlide, 3000);
+            }
+
+            function stopSlideInterval() {
+                clearInterval(slideInterval);
+            }
+
+            previousArrow.addEventListener('click', function () {
+                zoomOut();
+                stopSlideInterval();
+                previousSlide();
+                startSlideInterval();
+            });
+
+            nextArrow.addEventListener('click', function () {
+                zoomOut();
+                stopSlideInterval();
+                nextSlide();
+                startSlideInterval();
+            });
+
+            slides[currentIndex].addEventListener('click', function () {
+                if (slides[currentIndex].classList.contains('zoomable')) {
+                    zoomOut();
+                } else {
+                    zoomIn();
+                }
+            });
+
+            startSlideInterval();
+
+
+        </script>
+
+        <script>
+            window.onscroll = function () {
+                scrollFunction();
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById(" footerButton").style.display = "block";
+                } else {
+                    document.getElementById("footerButton").style.display = "none";
+                }
+            } function scrollToFooter() {
+                const
+                    footerElement = document.getElementById("footer"); footerElement.scrollIntoView({ behavior: "smooth" });
+            }
+        </script>
+
+        <button onclick="topFunction()" id="topButton" title="Go to top">Top</button>
+
+        <script>
+            /*當滑到頁面下一面一點才會出現TOP鍵*/
+            window.onscroll = function () {
+                scrollFunction();
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("topButton").style.display = "block";
+                } else {
+                    document.getElementById("topButton").style.display = "none";
+                }
+            }
+
+           /*按下TOP鍵會回到最上層*/
+            function topFunction() {
+                document.body.scrollTop = 0; // For Safari
+                document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+            }
+        </script>
+        <script src="js/jquery-2.1.4.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/script.js"></script>
+
+<center><div id="captions">
+            <h1>&nbsp;&nbsp;&nbsp;&nbsp;【《原子習慣》：細微改變帶來巨大成就的實證法則】</h1>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;作者：網路</p>
+         
+</div></center>
+        
+    <center><img src="原子習慣.jpg" alt="原子習慣.jpg" >  </center>
+        
+        <div id="captions">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;自律是成功和個人成長的重要基石。它能夠幫助我們建立良好的習慣、管理時間、增加效率，並實現自己的目標。在自律的旅程中，有一本極富啟發力的讀物，名為《原子習慣》（Atomic Habits），作者詹姆斯·克利爾（James Clear）以科學研究為基礎，深入探討了如何改變和培養習慣的有效策略。以下將為您介紹這本書的內容，並分為幾個段落，以幫助您更好地理解和應用其中的原則。</p>
+              <br>
+      
+           <h2>&nbsp;&nbsp;&nbsp;&nbsp;▍引言</h2>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;自律是成功的關鍵要素之一。然而，許多人嘗試著改變自己的習慣時，往往會遭遇挫折和困難。在《原子習慣》這本書中，詹姆斯·克利爾透過精確的科學研究和深入的觀察，提供了一種全新的方法來改變和培養習慣，稱為「原子習慣」。這種方法強調微小而持續的改變，並通過小而可行的行動，逐漸塑造出具有長期影響力的習慣。</p>
+                  <br>
+         <h2>&nbsp;&nbsp;&nbsp;&nbsp;▍習慣的原子結構</h2>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;書中提到，習慣就像是一個由許多微小組成的原子結構。克利爾指出，要改變一個習慣，關鍵在於專注於微小的、可行的行動，並將其轉化為一個穩定的日常習慣。他稱這些微小行動為「原子習慣」，並強調它們的力量在於其持久性和累積效應。</p>
+        <br>
+           <h2>&nbsp;&nbsp;&nbsp;&nbsp;▍設定明確的目標
+</h2>      
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;要培養自律，設定明確的目標是至關重要的一步。克利爾建議我們使用「四個法則」來設定目標，即明確、可衡量、可達成和時間相關的目標。明確指的是確定目標的具體內容，可衡量指的是能夠量化和追蹤目標的進展，可達成指的是確保目標具有可實現性，而時間相關則強調設定明確的時間框架。</p>
+      <br>
+            <h2>&nbsp;&nbsp;&nbsp;&nbsp;▍觸發行動的環境設計
+</h2>      
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;克利爾強調了環境對於習慣養成的重要性。他指出，通過改變周圍環境，我們可以設計出一個有利於培養習慣的場所。例如，將想要養成的習慣置於易於觸及的地方，並消除阻礙和誘惑。這種環境設計能夠激發行動，並促使我們更容易地培養起所需的習慣。</p>
+      <br>
+ <h2>&nbsp;&nbsp;&nbsp;&nbsp;▍反饋和調整
+</h2>      
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;在改變習慣的過程中，克利爾提到了反饋和調整的重要性。他建議我們應該關注行動的結果，並根據情況進行必要的調整。如果我們達到了目標，則應該獎勵自己，並尋找繼續進步的方法。如果未能達到目標，則需要回顧並找出可能的問題，然後調整行動計劃。</p>
+      <br>
+          <h2>&nbsp;&nbsp;&nbsp;&nbsp;▍結論段落：
+</h2>      
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;《原子習慣》這本書通過提供實用且科學驗證的策略，幫助我們理解並改變自己的習慣。克利爾強調了微小行動的重要性，並教導我們如何設定明確的目標、設計環境以及適應和調整行動計劃。這本書不僅提供了豐富的理論知識，還提供了實際的操作指南，使我們能夠開始並保持一個積極的自律習慣。無論您是希望建立健康的生活方式、提升工作效率還是實現個人目標，這本書都是一個絕佳的選擇，它將成為您自律之旅的良師益友。</p>
+  </div>
+           <br><br>
+   <center> <a href="社會觀察家.html"><img src="回社會觀察家.jpg" width="250px"></a></center>
+        <br><br><br>
+</body>

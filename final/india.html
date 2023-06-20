@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+
+<head>
+    <TITLE>自律上癮Bar</TITLE>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .bg {
+            background-image: url("home-1.png");
+            height: 55%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #e09b9f;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: rgb(254, 253, 253);
+            text-align: center;
+            padding: 20px 20px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            /*變色背景*/
+            background-color: #d36275;
+        }
+
+        .active {
+            /*關於背景*/
+            background-color: #d36275;
+        }
+        /*右下角的TOP鍵*/
+        #topButton {
+            display: none;
+            /* Hide the button by default */
+            position: fixed;
+            /* Fixed position to remain visible when scrolling */
+            bottom: 20px;
+            /* Distance from the bottom of the page */
+            right: 30px;
+            /* Distance from the right side of the page */
+            z-index: 99;
+            /* Ensure it appears above other elements */
+            font-size: 25px;
+            border: none;
+            outline: none;
+            background-color: #13401e;
+            color: #fff;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50px;
+            font-weight: bold;
+        }
+
+        #slideshow {
+            width: 900px;
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #slideshow img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 50px;
+            padding: 10px;
+            background-color: transparent;
+        }
+
+        .arrow.previous {
+            left: 10px;
+        }
+
+        .arrow.next {
+            right: 10px;
+        }
+
+      #captions {
+            margin-top: 20px;
+        }
+
+        #captions h1 {
+            font-size: 50px;
+            /* 修改文字大小為 50px */
+            margin-bottom: 10px;
+        }
+         #captions h2 {
+            font-size: 20px;
+            /* 修改文字大小為 20px */
+            margin-bottom: 10px;
+        }
+         #captions p {
+            font-size: 15px;
+            /* 修改文字大小為 15px */
+            margin-bottom: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <ul>
+        <li><a href="自律工具.html">自律工具</a></li>
+        <li><a href="社會觀察家.html">社會觀察家</a></li>
+        <li><a href="了解本站.html">瞭解本站</a></li>
+    </ul>
+
+    <a href="index.html"><img src="home-1.png" height="55.95%""></a>
+    
+
+    <p><font size=" 3" color="534741" face="微軟正黑體">
+
+    
+<center>
+        <div id="slideshow">
+            <img src="123-1.png" alt="...">
+            <img src="123-2.png" alt="...">
+            <img src="123-3.png" alt="...">
+            <div class="arrow previous">&#8249;</div>
+            <div class="arrow next">&#8250;</div>
+        </div></center>
+
+        <script>
+            var currentIndex = 0;
+            var slides = document.querySelectorAll('#slideshow img');
+            var previousArrow = document.querySelector('.arrow.previous');
+            var nextArrow = document.querySelector('.arrow.next');
+
+            function showSlide(index) {
+                for (var i = 0; i < slides.length; i++) {
+                    slides[i].style.display = 'none';
+                }
+                slides[index].style.display = 'block';
+            }
+
+            function previousSlide() {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                showSlide(currentIndex);
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % slides.length;
+                showSlide(currentIndex);
+            }
+
+            previousArrow.addEventListener('click', previousSlide);
+            nextArrow.addEventListener('click', nextSlide);
+
+            showSlide(currentIndex);
+            /*圖片輪播*/
+
+            previousArrow.addEventListener('mouseover', function () {
+                stopSlideInterval();
+            });
+
+            previousArrow.addEventListener('mouseout', function () {
+                startSlideInterval();
+            });
+
+            nextArrow.addEventListener('mouseover', function () {
+                stopSlideInterval();
+            });
+
+            nextArrow.addEventListener('mouseout', function () {
+                startSlideInterval();
+            });
+            /*-------------------------------------------------------*/
+            var slideInterval = setInterval(nextSlide, 3000); // 每 3 秒切換到下一張圖片
+
+            function startSlideInterval() {
+                slideInterval = setInterval(nextSlide, 3000);
+            }
+
+            function stopSlideInterval() {
+                clearInterval(slideInterval);
+            }
+
+            previousArrow.addEventListener('click', function () {
+                zoomOut();
+                stopSlideInterval();
+                previousSlide();
+                startSlideInterval();
+            });
+
+            nextArrow.addEventListener('click', function () {
+                zoomOut();
+                stopSlideInterval();
+                nextSlide();
+                startSlideInterval();
+            });
+
+            slides[currentIndex].addEventListener('click', function () {
+                if (slides[currentIndex].classList.contains('zoomable')) {
+                    zoomOut();
+                } else {
+                    zoomIn();
+                }
+            });
+
+            startSlideInterval();
+
+
+        </script>
+
+        <script>
+            window.onscroll = function () {
+                scrollFunction();
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById(" footerButton").style.display = "block";
+                } else {
+                    document.getElementById("footerButton").style.display = "none";
+                }
+            } function scrollToFooter() {
+                const
+                    footerElement = document.getElementById("footer"); footerElement.scrollIntoView({ behavior: "smooth" });
+            }
+        </script>
+
+        <button onclick="topFunction()" id="topButton" title="Go to top">Top</button>
+
+        <script>
+            /*當滑到頁面下一面一點才會出現TOP鍵*/
+            window.onscroll = function () {
+                scrollFunction();
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("topButton").style.display = "block";
+                } else {
+                    document.getElementById("topButton").style.display = "none";
+                }
+            }
+
+           /*按下TOP鍵會回到最上層*/
+            function topFunction() {
+                document.body.scrollTop = 0; // For Safari
+                document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+            }
+        </script>
+        <script src="js/jquery-2.1.4.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/script.js"></script>
+
+<center><div id="captions">
+            <h1>&nbsp;&nbsp;&nbsp;&nbsp;【時事分享｜印度將超越中國成為世界人口第一大國——是紅利還是炸彈？】</h1>
+</div></center>
+  <div id="captions">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;自律是一種重要的生活態度和價值觀，也是一種能力，使我們能夠自我約束、自我管理，並追求目標和夢想。</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;當自律成為一種內在的動力，就能體現在工作和學習上，也貫穿於生活的各個方面。</p>
+    <br>
+           <h1>&nbsp;&nbsp;&nbsp;&nbsp;自律的功能</h1>
+            <h2>&nbsp;&nbsp;&nbsp;&nbsp;1.幫助建立良好的生活和工作習慣</h2>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;當我們能夠紀律自己，按時完成工作任務，培養健康的生活方式，我們會發現自己更加高效、更有時間和空間去追求我們真正想要的事物。自律讓我們遠離拖延症和浪費時間的行為，提高我們的效率和生活品質。</p>
+      <br>
+            <h2>&nbsp;&nbsp;&nbsp;&nbsp;2.自律有助於培養自信和堅韌的精神</h2>
+
+  </div>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+
+<head>
+    <TITLE>自律上癮Bar</TITLE>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .bg {
+            background-image: url("home-1.png");
+            height: 55%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #e09b9f;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: rgb(254, 253, 253);
+            text-align: center;
+            padding: 20px 20px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            /*變色背景*/
+            background-color: #d36275;
+        }
+
+        .active {
+            /*關於背景*/
+            background-color: #d36275;
+        }
+        /*右下角的TOP鍵*/
+        #topButton {
+            display: none;
+            /* Hide the button by default */
+            position: fixed;
+            /* Fixed position to remain visible when scrolling */
+            bottom: 20px;
+            /* Distance from the bottom of the page */
+            right: 30px;
+            /* Distance from the right side of the page */
+            z-index: 99;
+            /* Ensure it appears above other elements */
+            font-size: 25px;
+            border: none;
+            outline: none;
+            background-color: #13401e;
+            color: #fff;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50px;
+            font-weight: bold;
+        }
+
+        #slideshow {
+            width: 900px;
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #slideshow img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 50px;
+            padding: 10px;
+            background-color: transparent;
+        }
+
+        .arrow.previous {
+            left: 10px;
+        }
+
+        .arrow.next {
+            right: 10px;
+        }
+
+      #captions {
+            margin-top: 20px;
+        }
+
+        #captions h1 {
+            font-size: 50px;
+            /* 修改文字大小為 50px */
+            margin-bottom: 10px;
+        }
+         #captions h2 {
+            font-size: 20px;
+            /* 修改文字大小為 20px */
+            margin-bottom: 10px;
+        }
+         #captions p {
+            font-size: 15px;
+            /* 修改文字大小為 15px */
+            margin-bottom: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <ul>
+        <li><a href="自律工具.html">自律工具</a></li>
+        <li><a href="社會觀察家.html">社會觀察家</a></li>
+        <li><a href="了解本站.html">瞭解本站</a></li>
+    </ul>
+
+    <a href="index.html"><img src="home-1.png" height="55.95%""></a>
+    
+
+    <p><font size=" 3" color="534741" face="微軟正黑體">
+
+    
+
+
+        <script>
+            var currentIndex = 0;
+            var slides = document.querySelectorAll('#slideshow img');
+            var previousArrow = document.querySelector('.arrow.previous');
+            var nextArrow = document.querySelector('.arrow.next');
+
+            function showSlide(index) {
+                for (var i = 0; i < slides.length; i++) {
+                    slides[i].style.display = 'none';
+                }
+                slides[index].style.display = 'block';
+            }
+
+            function previousSlide() {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                showSlide(currentIndex);
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % slides.length;
+                showSlide(currentIndex);
+            }
+
+            previousArrow.addEventListener('click', previousSlide);
+            nextArrow.addEventListener('click', nextSlide);
+
+            showSlide(currentIndex);
+            /*圖片輪播*/
+
+            previousArrow.addEventListener('mouseover', function () {
+                stopSlideInterval();
+            });
+
+            previousArrow.addEventListener('mouseout', function () {
+                startSlideInterval();
+            });
+
+            nextArrow.addEventListener('mouseover', function () {
+                stopSlideInterval();
+            });
+
+            nextArrow.addEventListener('mouseout', function () {
+                startSlideInterval();
+            });
+            /*-------------------------------------------------------*/
+            var slideInterval = setInterval(nextSlide, 3000); // 每 3 秒切換到下一張圖片
+
+            function startSlideInterval() {
+                slideInterval = setInterval(nextSlide, 3000);
+            }
+
+            function stopSlideInterval() {
+                clearInterval(slideInterval);
+            }
+
+            previousArrow.addEventListener('click', function () {
+                zoomOut();
+                stopSlideInterval();
+                previousSlide();
+                startSlideInterval();
+            });
+
+            nextArrow.addEventListener('click', function () {
+                zoomOut();
+                stopSlideInterval();
+                nextSlide();
+                startSlideInterval();
+            });
+
+            slides[currentIndex].addEventListener('click', function () {
+                if (slides[currentIndex].classList.contains('zoomable')) {
+                    zoomOut();
+                } else {
+                    zoomIn();
+                }
+            });
+
+            startSlideInterval();
+
+
+        </script>
+
+        <script>
+            window.onscroll = function () {
+                scrollFunction();
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById(" footerButton").style.display = "block";
+                } else {
+                    document.getElementById("footerButton").style.display = "none";
+                }
+            } function scrollToFooter() {
+                const
+                    footerElement = document.getElementById("footer"); footerElement.scrollIntoView({ behavior: "smooth" });
+            }
+        </script>
+
+        <button onclick="topFunction()" id="topButton" title="Go to top">Top</button>
+
+        <script>
+            /*當滑到頁面下一面一點才會出現TOP鍵*/
+            window.onscroll = function () {
+                scrollFunction();
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("topButton").style.display = "block";
+                } else {
+                    document.getElementById("topButton").style.display = "none";
+                }
+            }
+
+           /*按下TOP鍵會回到最上層*/
+            function topFunction() {
+                document.body.scrollTop = 0; // For Safari
+                document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+            }
+        </script>
+        <script src="js/jquery-2.1.4.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/script.js"></script>
+
+<center><div id="captions">
+            <h1>&nbsp;&nbsp;&nbsp;&nbsp;【你也有「口罩恐慌症」嗎？｜當口罩成為容貌焦慮者的救贖】</h1>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;作者：郭逸述</p>
+         
+</div></center>
+        
+    <center><img src="india.jpg" alt="容貌焦慮.jpg" >  </center>
+        
+        <div id="captions">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;根據聯合國的最新估計，印度人口已來到14.25億，預估4月底即將超越中國，面對當前的龐大人口，會帶來哪些優勢以及背後又可能存有什麼潛在問題？</p>
+              <br>
+           <h2>&nbsp;&nbsp;&nbsp;&nbsp;｜怎麼知道國家有多少人？</h2>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;在討論印度人口前，先來了解何謂 #人口普查 。人口普查的目的在於蒐集全國人口分布、家庭結構、就學、就業及居住狀況等重要資訊，透過掌握數據能夠了解國家當前的社會問題及需求，以提供國家未來政策的制定方針，可見人口普查的重要性。</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;但事實上，關於印度現今確切的人口總數眾說紛紜。原先每十年一次的人口普查於2021年受疫情影響而數度推遲，預計2024年才會著手開始調查，也就是說現今官方的人口統計數據尚停留於2011年，聯合國也表示具體的超越日期仍存在極大的不確性。而撇除疫情的影響之外，此次延遲也被認為和 ＃政治因素 有關，印度在野黨人士就認為這是印度總理莫迪（Narendra　Modi）考量明年選舉才一延再延，藉此隱瞞印度當前嚴重的 ＃失業問題　，這也意謂著人口普查的延遲還可能連帶影響國家政治的走向。</p>
+           <br>
+         <h2>&nbsp;&nbsp;&nbsp;&nbsp;｜肉眼可見的人口紅利</h2>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;雖然印度目前確切的人口不得而知，但關注其人口增長趨勢仍有其重要性。印度與中國是當前世界上人口最多的兩個國家，而印度現階段的 ＃平均年齡更僅有29歲　，加上　＃人口老化速度慢　，且往後十年皆會穩定成長，相較各國少子高齡化的現象，未來發展可期，過去中國便憑藉人口紅利帶起整體國家的經濟繁榮。不過，現在的中國卻已因著1980年代一胎化政策的實施，人口逐漸呈現負增長，人口高齡化的趨勢越加明顯，同時人力成本也隨著全球經濟局勢持續增長，這使得年輕的印度被外界認為最有機會取代中國成為　＃下一個世界工廠　。</p>
+        <br>
+           <h2>&nbsp;&nbsp;&nbsp;&nbsp;｜今日中國，明日印度？</h2>      
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;年輕人口對國家發展而言是關鍵的資產，印度於2014年起便開展「印度製造計畫」，企圖吸引外資，並以　＃發展全球製造中心　為目標，近年更積極開拓科技電子產業，但對於印度是否會複製中國的發展路徑仍存在相當多的討論聲浪。部分經濟學家便指出，印度當前　＃人口增長速度跟不上就業機會的創造速度，且總理莫迪上任以來青年失業率顯著攀升，雖有65%的人口落在35歲以下，但15到29歲的青年失業率卻近兩成。除此之外，印度還需面臨境內治理效率低落、基礎建設不足、受教育比例偏低、勞動環境不佳等問題，因此，如何將龐大人口轉化成人口紅利仍有待執政者的努力。</p>
+      <br>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;參考資料</p>
+             <p>&nbsp;&nbsp;&nbsp;&nbsp;超車中國！印度一週內可望成世界人口最多國家</p>
+             <p>&nbsp;&nbsp;&nbsp;&nbsp;https://reurl.cc/8qxgDX</p>
+             <p>&nbsp;&nbsp;&nbsp;&nbsp;印度人口將成世界第一，這個國家卻不知道自己有多少人</p>
+             <p>&nbsp;&nbsp;&nbsp;&nbsp;https://reurl.cc/OVKymX</p>
+             <p>&nbsp;&nbsp;&nbsp;&nbsp;【UDN轉角國際特約】莫迪能讓印度追上中國嗎？</p>
+             <p>&nbsp;&nbsp;&nbsp;&nbsp;https://reurl.cc/6Nn6zM</p>
+            <br>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;圖源：路透社</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;(網址：https://reurl.cc/XLK9VM)</p>
+  </div>
+           <br><br>
+    <a href="社會觀察家.html"> <img src="回社會觀察家.jpg"></a><br><br><br>
+    </body>

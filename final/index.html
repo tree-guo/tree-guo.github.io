@@ -1,10 +1,10 @@
 <!DOCTYPE html>
+
 <meta charset="utf-8">
 
 <head>
     <TITLE>自律上癮Bar</TITLE>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <img src="" alt="My test image">
     <style>
         body,
         html {
@@ -17,8 +17,8 @@
         }
 
         .bg {
-            background-image: url("OHH.png");
-            height: 35%;
+            background-image: url("home-1.png");
+            height: 55%;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
@@ -53,42 +53,215 @@
             /*關於背景*/
             background-color: #d36275;
         }
+        /*右下角的TOP鍵*/
+        #topButton {
+            display: none;
+            /* Hide the button by default */
+            position: fixed;
+            /* Fixed position to remain visible when scrolling */
+            bottom: 20px;
+            /* Distance from the bottom of the page */
+            right: 30px;
+            /* Distance from the right side of the page */
+            z-index: 99;
+            /* Ensure it appears above other elements */
+            font-size: 25px;
+            border: none;
+            outline: none;
+            background-color: #13401e;
+            color: #fff;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50px;
+            font-weight: bold;
+        }
+
+        #slideshow {
+            width: 1690px;
+            height: 800px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #slideshow img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 50px;
+            padding: 10px;
+            background-color: transparent;
+        }
+
+        .arrow.previous {
+            left: 10px;
+        }
+
+        .arrow.next {
+            right: 10px;
+        }
     </style>
 
 </head>
 
 <body>
 
-    <div class="bg"></div>
     <ul>
-        <li><a href="何為自律.html">何謂自律</a></li>
         <li><a href="自律工具.html">自律工具</a></li>
         <li><a href="社會觀察家.html">社會觀察家</a></li>
         <li><a href="了解本站.html">瞭解本站</a></li>
     </ul>
+
+    <a href="自律Bar.html"><img src="home-1.png" height="55.95%""></a>
     
     <center>
-        <h1><STRONG>自律上癮Bar</STRONG></h1>
         <p>進入本空間，讓我們一起專注於所愛之事物。</p>
     </center>
-                                                                     
 
- 
- 
- 
- 
- 
- 
- <table width="40%" HEIGHT=100000 align="left" background>
-  <tr><p><h4>進入沉浸式自律吧！</h4></p></tr>
-<BR>
-<iframe width="400" height="300" src="https://www.youtube.com/embed/jfKfPfyJRdk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-<BR>
- <tr><p><h4>鳳梨大學生哈囉</h4></p></tr>
-<BR> 
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.141079176044!2d120.47030280915999!3d23.563376078709975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346ebe56d7077847%3A0x1ea97cc03ed110a4!2z5ZyL56uL5Lit5q2j5aSn5a24!5e0!3m2!1szh-TW!2stw!4v1684117958997!5m2!1szh-TW!2stw" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
- </table>
-<BR>
- 
- </body>
+    <p><font size=" 3" color="534741" face="微軟正黑體">
 
+        <blockquote> &nbsp;&nbsp;&nbsp;&nbsp;對你而言，「自律」是怎樣的一件事呢？</blockquote>
+        <blockquote> &nbsp;&nbsp;&nbsp;&nbsp;有些人覺得，聽起來是一件困難、很耗費耐心的事情，也有人覺得自己因自律而開始把握時間、掌握方向。</blockquote>
+        <blockquote> &nbsp;&nbsp;&nbsp;&nbsp;歡迎蒞臨本網站，在這邊要與你一同摸索，什麼是自律，什麼又是自己能夠接受的自律模式呢？
+        </blockquote>
+
+
+        <div id="slideshow">
+            <img src="123-1.png" alt="...">
+            <img src="123-2.png" alt="...">
+            <img src="123-3.png" alt="...">
+            <div class="arrow previous">&#8249;</div>
+            <div class="arrow next">&#8250;</div>
+        </div>
+
+        <script>
+            var currentIndex = 0;
+            var slides = document.querySelectorAll('#slideshow img');
+            var previousArrow = document.querySelector('.arrow.previous');
+            var nextArrow = document.querySelector('.arrow.next');
+
+            function showSlide(index) {
+                for (var i = 0; i < slides.length; i++) {
+                    slides[i].style.display = 'none';
+                }
+                slides[index].style.display = 'block';
+            }
+
+            function previousSlide() {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                showSlide(currentIndex);
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % slides.length;
+                showSlide(currentIndex);
+            }
+
+            previousArrow.addEventListener('click', previousSlide);
+            nextArrow.addEventListener('click', nextSlide);
+
+            showSlide(currentIndex);
+            /*圖片輪播*/
+
+            previousArrow.addEventListener('mouseover', function () {
+                stopSlideInterval();
+            });
+
+            previousArrow.addEventListener('mouseout', function () {
+                startSlideInterval();
+            });
+
+            nextArrow.addEventListener('mouseover', function () {
+                stopSlideInterval();
+            });
+
+            nextArrow.addEventListener('mouseout', function () {
+                startSlideInterval();
+            });
+            /*-------------------------------------------------------*/
+            var slideInterval = setInterval(nextSlide, 3000); // 每 3 秒切換到下一張圖片
+
+            function startSlideInterval() {
+                slideInterval = setInterval(nextSlide, 3000);
+            }
+
+            function stopSlideInterval() {
+                clearInterval(slideInterval);
+            }
+
+            previousArrow.addEventListener('click', function () {
+                zoomOut();
+                stopSlideInterval();
+                previousSlide();
+                startSlideInterval();
+            });
+
+            nextArrow.addEventListener('click', function () {
+                zoomOut();
+                stopSlideInterval();
+                nextSlide();
+                startSlideInterval();
+            });
+
+            slides[currentIndex].addEventListener('click', function () {
+                if (slides[currentIndex].classList.contains('zoomable')) {
+                    zoomOut();
+                } else {
+                    zoomIn();
+                }
+            });
+
+            startSlideInterval();
+
+
+        </script>
+
+        <script>
+            window.onscroll = function () {
+                scrollFunction();
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById(" footerButton").style.display = "block";
+                } else {
+                    document.getElementById("footerButton").style.display = "none";
+                }
+            } function scrollToFooter() {
+                const
+                    footerElement = document.getElementById("footer"); footerElement.scrollIntoView({ behavior: "smooth" });
+            }
+        </script>
+
+        <button onclick="topFunction()" id="topButton" title="Go to top">Top</button>
+
+        <script>
+            /*當滑到頁面下一面一點才會出現TOP鍵*/
+            window.onscroll = function () {
+                scrollFunction();
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("topButton").style.display = "block";
+                } else {
+                    document.getElementById("topButton").style.display = "none";
+                }
+            }
+
+           /*按下TOP鍵會回到最上層*/
+            function topFunction() {
+                document.body.scrollTop = 0; // For Safari
+                document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+            }
+        </script>
+        <script src="js/jquery-2.1.4.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/script.js"></script>
+</body>
